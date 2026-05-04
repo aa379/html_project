@@ -1,10 +1,496 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG 7 能源魔法島</title>
+    <style>
+        /* 重置基本樣式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f5;
+            color: #333;
+        }
+
+        /* 導覽列 (Header) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #fdfbf7;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a7b31;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #1a7b31;
+        }
+
+        .login-btn {
+            background-color: #0b601e;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 主要內容區塊 (Hero Section) */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            min-height: 60vh;
+        }
+
+        .main-title {
+            text-align: center;
+            color: #1a7b31;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            margin-bottom: 100px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .cta-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 800px;
+            max-width: 90%;
+            padding: 30px 40px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-explore, .btn-quiz {
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-explore {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-quiz {
+            background-color: #ffda75;
+            color: #555;
+            box-shadow: 0 4px 10px rgba(255, 218, 117, 0.3);
+        }
+
+        /* === 新增：用戶真心話 (Testimonials) === */
+        .testimonials {
+            background-color: #fdfdfd; /* 乾淨的白色背景 */
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 1.8rem;
+            color: #000;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .arrow {
+            background: none;
+            border: none;
+            font-size: 3rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0 10px;
+        }
+
+        .arrow:hover {
+            color: #888;
+        }
+
+        .testimonial-content {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            gap: 40px;
+            max-width: 800px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            /* 暫時給個背景色，讓沒有圖片時也能看出是圓形 */
+            background-color: #2da1d7; 
+            flex-shrink: 0;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .text-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .text-content strong {
+            font-size: 1.1rem;
+            color: #000;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #555;
+        }
+
+        /* Footer 上方的宣傳文字區塊 */
+        .pre-footer-banner {
+            background-color: #ebebeb;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .pre-footer-banner h2 {
+            font-size: 1.8rem;
+            color: #5b3e1f;
+            margin-bottom: 15px;
+        }
+
+        .pre-footer-banner h2 span {
+            font-weight: 900;
+        }
+
+        .pre-footer-banner p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* 頁尾 (Footer) 樣式 */
+        footer {
+            background-color: #e0e0e0; 
+            padding: 40px 60px 20px;
+            color: #666;
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 左側區塊 (聯絡資訊) */
+        .footer-info-group {
+            display: flex;
+            width: 50%;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-col h4 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-col p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            gap: 8px; 
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+
+        /* 右側相關連結 */
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            width: 45%;
+        }
+
+        .footer-right h4 {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .links-grid {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .link-item {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border: 1px solid #e2e8f0; 
+            border-radius: 5px;
+            overflow: hidden; 
+            transition: all 0.2s ease;
+            height: 60px; 
+            width: 180px; 
+        }
+
+        .link-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+            border-color: #cbd5e1;
+        }
+
+        .link-item img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            padding: 2px; 
+        }
+
+        .copyright {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: auto;
+        }
+
+        /* 回到頂部按鈕 */
+        .back-to-top {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #666;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+    </style>
 </head>
 <body>
+
+    <!-- 頂部導覽列 -->
+    <header>
+        <div class="logo">SDG 7 能源魔法島</div>
+        <nav>
+            <ul>
+                <li><a href="#">SDG 7 介紹</a></li>
+                <li><a href="#">資料來源</a></li>
+                <li><a href="#">進入測驗</a></li>
+                <li><a href="#">關於我們</a></li>
+            </ul>
+        </nav>
+        <button class="login-btn">登入</button>
+    </header>
+
+    <!-- 主要內容 -->
+    <section class="hero">
+        <h1 class="main-title">
+            SDG 7:<br>
+            可負擔的再生能源
+        </h1>
+        <div class="cta-card">
+            <div class="cta-text">
+                歡迎來到能源魔法島，<br>
+                一起來讓學習變有趣吧！
+            </div>
+            <div class="cta-buttons">
+                <button class="btn-explore">開始探索</button>
+                <button class="btn-quiz">進入測驗</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 新增：用戶真心話區塊 === -->
+    <section class="testimonials">
+        <h2>用戶真心話</h2>
+        
+        <div class="carousel-container">
+            <!-- 左箭頭 (使用 HTML 符號) -->
+            <button class="arrow left-arrow">&#10094;</button>
+
+            <!-- 內容區塊 -->
+            <div class="testimonial-content">
+                <!-- 頭像圖片，請將 src 替換為實際的圖片路徑 -->
+                <img src="https://images.icon-icons.com/3708/PNG/512/man_person_people_avatar_icon_230017.png" alt="用戶頭像" class="avatar">
+                
+                <!-- 文字與名稱 -->
+                <div class="text-content">
+                    <p>
+                        老實說，比起看影片，我真的更喜歡這種網頁式的呈現方式。最推的一點是它的排版。以前看一些教學網站，字縮在一起真的會看到眼花，但這個網站的資訊密度抓得蠻剛好的，還有許多圖表，對我這種喜歡快速掃過、抓重點的人來說，效率快超多。大推能源魔法島。
+                    </p>
+                    <strong>中央大學 / 王同學</strong>
+                </div>
+            </div>
+
+            <!-- 右箭頭 (使用 HTML 符號) -->
+            <button class="arrow right-arrow">&#10095;</button>
+        </div>
+
+        <!-- 下方點點指示器 -->
+        <div class="carousel-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </section>
+
+    <!-- Footer 上方的宣傳區塊 -->
+    <section class="pre-footer-banner">
+        <h2><span>30,000,000+ 人</span>的教學平台</h2>
+        <p>まほおのしま 是全亞洲最受歡迎的教平學台</p>
+    </section>
+
+    <!-- 頁尾區塊 -->
+    <footer id="footer">
+        
+        <div class="footer-content">
+            <!-- 左側聯絡資訊 -->
+            <div class="footer-info-group">
+                <div class="footer-col">
+                    <h4>聯絡我們</h4>
+                    <p><span class="icon">&#9993;</span> zhengweichen898@gmail.com</p>
+                    <p><span class="icon">&#128222;</span> (03)412-5252</p>
+                    <br>
+                    <p>聯繫地址:桃園市中壢區中大路300號</p>
+                    <p>服務時間 | 星期一至星期五 9:30 - 12:00 / 13:00 - 17:00</p>
+                </div>
+            </div>
+
+            <!-- 右側相關連結 -->
+            <div class="footer-right">
+                <h4>相關連結</h4>
+                <div class="links-grid">
+                    
+                    <a href="https://go-moea.tw/#gsc.tab=0" target="_blank" class="link-item">
+                        <img src="https://www.go-moea.tw/_next/static/media/logo.b91716c7.jpeg" alt="2050淨零排放">
+                    </a>
+
+                    <a href="https://www.moeaea.gov.tw/ECW/populace/home/Home.aspx" target="_blank" class="link-item">
+                        <img src="https://ea01.moeaea.gov.tw/a0101/01/2050nzea/wp-content/uploads/2023/09/light_footer_2.png" alt="經濟部能源署">
+                    </a>
+
+                    <a href="https://www.moenv.gov.tw/" target="_blank" class="link-item">
+                        <img src="https://ea01.moeaea.gov.tw/a0101/01/2050nzea/wp-content/uploads/2023/09/light_footer_3.png" alt="國家發展委員會">
+                    </a>
+
+                    <a href="https://www.ndc.gov.tw/" target="_blank" class="link-item">
+                        <img src="https://ea01.moeaea.gov.tw/a0101/01/2050nzea/wp-content/uploads/2023/05/ndc_4.png" alt="環境部">
+                    </a>
+                    
+                    <a href="https://www.iea.org/" target="_blank" class="link-item">
+                        <img src="https://c2e2.unepccc.org/wp-content/uploads/sites/3/2020/10/iea-logo.png" alt="IEA">
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    © まほおのしま All Rights Reserved.
+                </div>
+            </div>
+        </div>
+
+        <!-- 回到頂部按鈕 -->
+        <a href="#" class="back-to-top">︿</a>
+    </footer>
 
 </body>
 </html>
