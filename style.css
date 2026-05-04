@@ -1,0 +1,331 @@
+       /* --- 原有基礎樣式 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f5;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #fdfbf7;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a7b31;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #1a7b31;
+        }
+
+        .login-btn {
+            background-color: #0b601e;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- 主要內容區塊 --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            min-height: 60vh;
+        }
+
+        .main-title {
+            text-align: center;
+            color: #1a7b31;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            margin-bottom: 100px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .cta-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 800px;
+            max-width: 90%;
+            padding: 30px 40px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-explore, .btn-quiz {
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-explore:active, .btn-quiz:active {
+            transform: scale(0.95);
+        }
+
+        .btn-explore {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-quiz {
+            background-color: #ffda75;
+            color: #555;
+            box-shadow: 0 4px 10px rgba(255, 218, 117, 0.3);
+        }
+
+        /* --- 用戶真心話區塊 --- */
+        .testimonials {
+            background-color: #fdfdfd;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 1.8rem;
+            color: #000;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 20px;
+            position: relative;
+        }
+
+        .carousel-viewport {
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-slide {
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .testimonial-content {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            gap: 40px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .arrow {
+            background: none;
+            border: none;
+            font-size: 3rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0 10px;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .arrow:hover { color: #888; }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #e0e0e0; 
+            flex-shrink: 0;
+            border: 4px solid #f4f9f5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .text-content p { font-size: 1.05rem; line-height: 1.8; color: #333; }
+        .text-content strong { font-size: 1.1rem; color: #000; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active { background-color: #555; }
+
+        /* --- Footer 樣式 --- */
+        footer {
+            background-color: #e0e0e0; 
+            padding: 40px 60px 20px;
+            color: #666;
+            position: relative;
+        }
+
+        .footer-content { display: flex; justify-content: space-between; }
+        .footer-info-group { display: flex; width: 50%; }
+        .footer-col { display: flex; flex-direction: column; gap: 8px; }
+        .footer-col h4 { color: #555; font-size: 1.1rem; margin-bottom: 10px; }
+        .footer-col p { font-size: 0.95rem; line-height: 1.6; display: flex; align-items: center; gap: 8px; }
+        .footer-right { display: flex; flex-direction: column; width: 45%; }
+        .footer-right h4 { margin-bottom: 15px; color: #555; font-size: 1.1rem; }
+        .links-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+        .link-item {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border: 1px solid #e2e8f0; 
+            border-radius: 5px;
+            overflow: hidden; 
+            transition: all 0.2s ease;
+            height: 60px; 
+            width: 180px; 
+        }
+        .link-item img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+        .copyright { text-align: right; font-size: 0.85rem; color: #999; margin-top: auto; }
+        .back-to-top {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #666;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* --- 新增：測驗視窗自訂樣式 --- */
+        #quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .quiz-container {
+            background: white;
+            width: 600px;
+            max-width: 95%;
+            padding: 40px;
+            border-radius: 24px;
+            position: relative;
+            text-align: center;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .option-btn {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 16px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background-color: #eef2ef;
+            border-color: #1a7b31;
+        }
+
+        .option-btn.correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; }
+        .option-btn.wrong { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
