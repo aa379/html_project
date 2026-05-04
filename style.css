@@ -245,42 +245,102 @@
         .footer-col { display: flex; flex-direction: column; gap: 8px; }
         .footer-col h4 { color: #555; font-size: 1.1rem; margin-bottom: 10px; }
         .footer-col p { font-size: 0.95rem; line-height: 1.6; display: flex; align-items: center; gap: 8px; }
-        .footer-right { display: flex; flex-direction: column; width: 45%; }
-        .footer-right h4 { margin-bottom: 15px; color: #555; font-size: 1.1rem; }
-        .links-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
-        .link-item {
-            background-color: white;
+        /* 調整右側容器：不再強制靠右對齊，改讓內部元素自己發揮 */
+        .footer-right {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            border: 1px solid #e2e8f0; 
-            border-radius: 5px;
-            overflow: hidden; 
-            transition: all 0.2s ease;
-            height: 60px; 
-            width: 180px; 
+            flex-direction: column;
+            width: 60%; /* 稍微加寬右側空間 */
+            position: relative; /* 讓著作權可以相對這個容器定位 */
         }
-        .link-item img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
-        .copyright { text-align: right; font-size: 0.85rem; color: #999; margin-top: auto; }
+
+        /* 相關連結標題：靠左對齊 */
+        .footer-right h4 {
+            text-align: left;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        /* 連結網格：靠左對齊，並移除背景框 */
+        .links-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* 圖示之間的間距 */
+            justify-content: flex-start; /* ✅ 讓圖示靠左排列 */
+            margin-bottom: 20px;
+        }
+                /* 1. 讓 IEA 變大且往右移 */
+        .links-grid .link-item:last-child {
+            height: 65px;         /* ✅ 把高度從 50px 調大到 65px */
+            margin-left: 10px;    /* ✅ 增加左邊距，把它往右邊推 */
+            mix-blend-mode: multiply; /* 確保白色背景消失 */
+        }
+
+        /* 相關連結圖示：移除白框，讓它跟國發會標誌一樣乾淨 */
+        /* 強效版：讓所有連結圖示去背並對齊 */
+        .link-item {
+            background-color: transparent !important;
+            border: none !important;
+            display: flex;
+            align-items: center;
+            height: 50px; 
+            width: auto; 
+            /* ✅ 神奇特效：讓圖片的白色背景直接變不見 */
+            mix-blend-mode: multiply; 
+            transition: transform 0.2s;
+        }
+
+        .link-item img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .link-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .link-item img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* 向上箭頭按鈕：換成圓形設計，移除文字感 */
         .back-to-top {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            right: 0;
+            bottom: 0;
+            width: 44px;
+            height: 44px;
+            background-color: #ffffff; /* 圓形背景色 */
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;        /* 變成圓形 */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
             color: #666;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
+        .back-to-top:hover {
+            background-color: #f8fafc;
+            color: #1a7b31;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 確保著作權文字有留位置給圓形按鈕 */
+        .copyright {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 150px;
+            white-space: nowrap;
+            padding-right: 20px; /* 這裡預留 60px 就不會被按鈕擋到 */
+        }
         /* --- 新增：測驗視窗自訂樣式 --- */
         #quiz-modal {
             display: none;
